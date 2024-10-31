@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: datapower-operator
+spec:
+  template:
+    spec:
+      containers:
+      - name: datapower-operator
+        env:
+        - name: IBM_ENTITLED_REGISTRY
+          value: image-registry.cluster-poc-7be4149f30480846757a2468f333dd09-0000.eu-de.containers.appdomain.cloud
+          # value: "cp.icr.io/cp/datapower"
+        - name: IBM_FREE_REGISTRY_DATAPOWER
+          value: image-registry.cluster-poc-7be4149f30480846757a2468f333dd09-0000.eu-de.containers.appdomain.cloud
+          # value: "icr.io/cpopen/datapower"
+        - name: IBM_FREE_REGISTRY_CPOPEN
+          value: image-registry.cluster-poc-7be4149f30480846757a2468f333dd09-0000.eu-de.containers.appdomain.cloud
+          # value: "icr.io/cpopen"
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: datapower-operator
+imagePullSecrets:
+- name: apic-registry-secret

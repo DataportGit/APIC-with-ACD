@@ -1,0 +1,37 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: api-connect-appset
+spec:
+  syncPolicy:
+    preserveResourcesOnDeletion: true
+  generators:
+  - git:
+      repoURL: https://github.ibm.com/Martin-Caesar/install-api-connect-with-argocd.git
+      revision: HEAD
+      directories:
+      - path: "*"
+  template:
+    metadata:
+      name: "{{ path.basename }}"
+    spec:
+      syncPolicy:
+        syncOptions:
+        - ServerSideApply=true
+        - Validate=false
+        - CreateNamespace=true
+      ignoreDifferences:
+      - group: apiextensions.k8s.io
+        kind: CustomResourceDefinition
+        name: datapowerservices.datapower.ibm.com
+        jsonPointers:
+        - /spec/conversion/webhook/clientConfig/service/name
+        - /spec/conversion/webhook/clientConfig/service/namespace
+      project: default
+      source:
+        repoURL: https://github.ibm.com/Martin-Caesar/install-api-connect-with-argocd.git
+        targetRevision: HEAD
+        path: "{{ path }}"
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: apic

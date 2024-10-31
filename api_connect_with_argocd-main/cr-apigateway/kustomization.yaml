@@ -1,0 +1,7 @@
+resources:
+  - apigateway_cr.yaml
+
+patches:
+  - path: patch-apigateway_cr.yaml
+
+namespace: apic

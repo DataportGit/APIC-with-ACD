@@ -1,0 +1,20 @@
+graph G {
+    rankdir = RL
+
+    "analytics-ingestion-client" -- "analytics-ai-endpoint" -- "ingress-issuer"
+    "portal-admin-client" -- "portal-admin"
+    "gateway-client-client" -- "gwv6-manager-endpoint" -- "ingress-issuer"
+
+    "custom-cm-endpoint" -- "pkibw (custom) issuer"
+    "custom-apim-endpoint" -- "pkibw (custom) issuer"
+    "custom-consumer-endpoint" -- "pkibw (custom) issuer"
+    "hub-endpoint" -- "pkibw (custom) issuer"
+
+    "ingress-issuer" -- "External Frontend/Ingress"
+
+    "portal-admin" -- "ingress-issuer"
+    "custom-portal-web" -- "pkibw (custom) issuer"
+
+    "pkibw (custom) issuer" -- "External Frontend/Ingress"
+
+}

@@ -1,0 +1,30 @@
+apiVersion: analytics.apiconnect.ibm.com/v1beta1
+kind: AnalyticsCluster
+metadata:
+  name: analytics
+spec:
+  version: 10.0.8.0
+  license:
+    accept: true
+    use: nonproduction
+    license: L-DZZQ-MGVN8V
+  profile: n1xc2.m16
+  imagePullSecrets:
+  - apic-registry-secret
+  imageRegistry: image-registry.cluster-poc-7be4149f30480846757a2468f333dd09-0000.eu-de.containers.appdomain.cloud
+  # imageRegistry: cp.icr.io/cp/apic
+  ingestion:
+    endpoint:
+      #ingressClassName: $INGRESS_CLASS
+      annotations:
+        cert-manager.io/issuer: ingress-issuer
+      hosts:
+      - name: ai.cluster-poc-7be4149f30480846757a2468f333dd09-0000.eu-de.containers.appdomain.cloud
+        secretName: analytics-ai-endpoint
+    clientSubjectDN: CN=analytics-ingestion-client,O=cert-manager
+  storage:
+    type: shared
+    shared:
+      volumeClaimTemplate:
+        storageClassName: ibmc-vpc-block-10iops-tier
+        volumeSize: 10Gi

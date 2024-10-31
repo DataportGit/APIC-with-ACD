@@ -1,0 +1,11 @@
+resources:
+  - ibm-datapower.yaml
+
+patches:
+  - path: patch-ibm-datapower.yaml
+
+images:
+  - name: icr.io/cpopen/datapower-operator
+    newName: image-registry.cluster-poc-7be4149f30480846757a2468f333dd09-0000.eu-de.containers.appdomain.cloud/datapower-operator
+
+namespace: apic

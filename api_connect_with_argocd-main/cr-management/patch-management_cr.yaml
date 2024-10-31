@@ -1,0 +1,53 @@
+apiVersion: management.apiconnect.ibm.com/v1beta1
+kind: ManagementCluster
+metadata:
+  name: management
+spec:
+  version: 10.0.8.0
+  imagePullSecrets:
+  - apic-registry-secret
+  imageRegistry: image-registry.cluster-poc-7be4149f30480846757a2468f333dd09-0000.eu-de.containers.appdomain.cloud
+  # imageRegistry: cp.icr.io/cp/apic  # $DOCKER_REGISTRY
+  profile: n1xc4.m16
+  cloudManagerEndpoint:
+    #ingressClassName: $INGRESS_CLASS
+    # annotations:
+    #   cert-manager.io/issuer: ingress-issuer
+    hosts:
+    # - name: admin.$STACK_HOST
+    - name: admin.cluster-poc-7be4149f30480846757a2468f333dd09-0000.eu-de.containers.appdomain.cloud
+      secretName: custom-cm-endpoint
+  apiManagerEndpoint:
+    #ingressClassName: $INGRESS_CLASS
+    # annotations:
+    #   cert-manager.io/issuer: ingress-issuer
+    hosts:
+    # - name: manager.$STACK_HOST
+    - name: manager.cluster-poc-7be4149f30480846757a2468f333dd09-0000.eu-de.containers.appdomain.cloud
+      secretName: custom-apim-endpoint
+  platformAPIEndpoint:
+    #ingressClassName: $INGRESS_CLASS
+    # annotations:
+    #   cert-manager.io/issuer: ingress-issuer
+    hosts:
+    # - name: api.$STACK_HOST
+    - name: api.cluster-poc-7be4149f30480846757a2468f333dd09-0000.eu-de.containers.appdomain.cloud
+      secretName: custom-api-endpoint
+  consumerAPIEndpoint:
+    #ingressClassName: $INGRESS_CLASS
+    # annotations:
+    #   cert-manager.io/issuer: ingress-issuer
+    hosts:
+    # - name: consumer.$STACK_HOST
+    - name: consumer.cluster-poc-7be4149f30480846757a2468f333dd09-0000.eu-de.containers.appdomain.cloud
+      secretName: custom-consumer-endpoint
+  consumerCatalogEndpoint:
+    hosts:
+    - name: consumer-catalog.cluster-poc-7be4149f30480846757a2468f333dd09-0000.eu-de.containers.appdomain.cloud
+      secretName: custom-consumer-catalog-endpoint
+  databaseVolumeClaimTemplate:
+    storageClassName: ibmc-vpc-block-10iops-tier  # $STORAGE_CLASS
+  license:
+    accept: true
+    use: nonproduction
+    license: L-DZZQ-MGVN8V

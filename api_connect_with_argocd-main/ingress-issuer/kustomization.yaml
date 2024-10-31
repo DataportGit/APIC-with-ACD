@@ -1,0 +1,6 @@
+resources:
+  - ingress-issuer.yaml
+  # - management-server.yaml
+  - letsencrypt-management.yaml
+
+namespace: apic

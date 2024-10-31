@@ -1,0 +1,15 @@
+resources:
+  - ibm-apiconnect.yaml
+
+patches:
+  - path: patch-ibm-apiconnect.yaml
+
+images:
+  - name: REPLACE-DOCKER-REGISTRY/ibm-apiconnect-operator
+    newName: image-registry.cluster-poc-7be4149f30480846757a2468f333dd09-0000.eu-de.containers.appdomain.cloud/ibm-apiconnect-operator
+  - name: REPLACE-DOCKER-REGISTRY/ibm-apiconnect-operator-init
+    newName: image-registry.cluster-poc-7be4149f30480846757a2468f333dd09-0000.eu-de.containers.appdomain.cloud/ibm-apiconnect-operator-init
+  - name: REPLACE-DOCKER-REGISTRY/ibm-apiconnect-webhook-delete
+    newName: image-registry.cluster-poc-7be4149f30480846757a2468f333dd09-0000.eu-de.containers.appdomain.cloud/ibm-apiconnect-webhook-delete
+
+namespace: apic

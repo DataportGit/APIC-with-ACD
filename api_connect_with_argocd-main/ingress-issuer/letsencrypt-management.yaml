@@ -1,0 +1,129 @@
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: letsencrypt-issuer
+  labels: {
+    app.kubernetes.io/instance: "management",
+    app.kubernetes.io/managed-by: "ibm-apiconnect",
+    app.kubernetes.io/name: "letsencrypt-issuer"
+  }
+spec:
+  acme:
+    preferredChain: ""
+    privateKeySecretRef:
+      name: letsencrypt-ca
+    server: https://acme-v02.api.letsencrypt.org/directory
+    solvers:
+    - http01:
+        ingress:
+          class: public-iks-k8s-nginx
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: custom-cm-endpoint
+spec:
+    # commonName: cm-endpoint
+    secretName: custom-cm-endpoint
+    dnsNames:
+    # - admin.example.com
+    - admin.cluster-poc-7be4149f30480846757a2468f333dd09-0000.eu-de.containers.appdomain.cloud
+    issuerRef:
+        name: letsencrypt-issuer  # pkbwi
+        # kind: ClusterIssuer
+    usages:
+    - "server auth"
+    - "signing"
+    - "key encipherment"
+    duration: 17520h0m0s # 17520h # 2 years
+    renewBefore: 720h0m0s # 720h # 30 days
+    privateKey:
+      rotationPolicy: Always
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: custom-apim-endpoint
+spec:
+    # commonName: apim-endpoint
+    secretName: custom-apim-endpoint
+    dnsNames:
+    # - manager.example.com
+    - manager.cluster-poc-7be4149f30480846757a2468f333dd09-0000.eu-de.containers.appdomain.cloud
+    issuerRef:
+        name: letsencrypt-issuer  # pkbwi
+        # kind: ClusterIssuer
+    usages:
+    - "server auth"
+    - "signing"
+    - "key encipherment"
+    duration: 17520h0m0s # 17520h # 2 years
+    renewBefore: 720h0m0s # 720h # 30 days
+    privateKey:
+      rotationPolicy: Always
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: custom-api-endpoint
+spec:
+    # commonName: api-endpoint
+    secretName: custom-api-endpoint
+    dnsNames:
+    # - api.example.com
+    - api.cluster-poc-7be4149f30480846757a2468f333dd09-0000.eu-de.containers.appdomain.cloud
+    issuerRef:
+        name: letsencrypt-issuer  # pkbwi
+        # kind: ClusterIssuer
+    usages:
+    - "server auth"
+    - "signing"
+    - "key encipherment"
+    duration: 17520h0m0s # 17520h # 2 years
+    renewBefore: 720h0m0s # 720h # 30 days
+    privateKey:
+      rotationPolicy: Always
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: custom-consumer-endpoint
+spec:
+    # commonName: consumer-endpoint
+    secretName: custom-consumer-endpoint
+    dnsNames:
+    # - consumer.example.com
+    - consumer.cluster-poc-7be4149f30480846757a2468f333dd09-0000.eu-de.containers.appdomain.cloud
+    issuerRef:
+        name: letsencrypt-issuer  # pkbwi
+        # kind: ClusterIssuer
+    usages:
+    - "server auth"
+    - "signing"
+    - "key encipherment"
+    duration: 17520h0m0s # 17520h # 2 years
+    renewBefore: 720h0m0s # 720h # 30 days
+    privateKey:
+      rotationPolicy: Always
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: custom-consumer-catalog-endpoint
+spec:
+    # commonName: consumer-catalog-endpoint
+    secretName: custom-consumer-catalog-endpoint
+    dnsNames:
+    # - consumer-catalog.example.com
+    - consumer-catalog.cluster-poc-7be4149f30480846757a2468f333dd09-0000.eu-de.containers.appdomain.cloud
+    issuerRef:
+        name: letsencrypt-issuer  # pkbwi
+        # kind: ClusterIssuer
+    usages:
+    - "server auth"
+    - "signing"
+    - "key encipherment"
+    duration: 17520h0m0s # 17520h # 2 years
+    renewBefore: 720h0m0s # 720h # 30 days
+    privateKey:
+      rotationPolicy: Always

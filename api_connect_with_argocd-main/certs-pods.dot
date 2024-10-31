@@ -1,0 +1,63 @@
+graph G {
+    rankdir = LR
+
+    "management-analytics-proxy" -- "analytics-ingestion-client"
+#    "management-analytics-proxy" -- "management-ca"
+
+#    "management-analytics-ui" -- "management-ca"
+#    "management-analytics-ui" -- "management-server"
+#    "management-analytics-ui" -- "management-client"
+
+    "management-apim" -- "analytics-ingestion-client"
+    "management-apim" -- "gateway-client-client"
+    "management-apim" -- "portal-admin-client"
+
+#    "management-client-downloads-server" -- "management-server"
+
+#    "management-consumer-catalog" -- "management-ca"
+#    "management-consumer-catalog" -- "management-server"
+#    "management-consumer-catalog" -- "management-client"
+    "management-consumer-catalog" -- "custom-consumer-endpoint"
+
+#    "management-juhu" -- "management-ca"
+#    "management-juhu" -- "management-server"
+#    "management-juhu" -- "management-client"
+
+#    "management-ldap" -- "management-ca"
+#    "management-ldap" -- "management-server"
+#    "management-ldap" -- "management-client"
+
+#    "management-lur" -- "management-ca"
+#    "management-lur" -- "management-server"
+#    "management-lur" -- "management-client"
+#    "management-lur" -- "management-db-client-postgres"
+#    "management-lur" -- "management-db-client-apicuser"
+
+#    "management-natcluster-0" -- "management-server"
+#    "management-natcluster-0" -- "management-natcluster-mgmt"
+
+#    "management-portal-proxy" -- "management-ca"
+#    "management-portal-proxy" -- "management-server"
+#    "management-portal-proxy" -- "management-client"
+    "management-portal-proxy" -- "portal-admin-client"
+#    "management-portal-proxy" -- "management-db-client-postgres"
+#    "management-portal-proxy" -- "management-db-client-apicuser"
+
+#    "management-s3proxy-0" -- "management-s3proxy-all"
+
+    "management-taskmanager" -- "analytics-ingestion-client"
+    "management-taskmanager" -- "gateway-client-client"
+    "management-taskmanager" -- "portal-admin-client"
+#    "management-taskmanager" -- "management-ca"
+#    "management-taskmanager" -- "management-client"
+#    "management-taskmanager" -- "management-db-client-postgres"
+#    "management-taskmanager" -- "management-db-client-apicuser"
+
+#    "management-ui" -- "management-ca"
+#    "management-ui" -- "management-server"
+#    "management-ui" -- "management-client"
+
+#    "management-websocket-proxy" -- "management-ca"
+#    "management-websocket-proxy" -- "management-server"
+#    "management-websocket-proxy" -- "management-client"
+}

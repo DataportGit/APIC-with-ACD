@@ -1,0 +1,7 @@
+resources:
+  - portal_cr.yaml
+
+patches:
+  - path: patch-portal_cr.yaml
+
+namespace: apic

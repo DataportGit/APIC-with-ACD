@@ -1,0 +1,7 @@
+resources:
+  - management_cr.yaml
+
+patches:
+  - path: patch-management_cr.yaml
+
+namespace: apic

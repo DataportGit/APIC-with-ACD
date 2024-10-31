@@ -1,0 +1,40 @@
+apiVersion: gateway.apiconnect.ibm.com/v1beta1
+kind: GatewayCluster
+metadata:
+  name: gwv6
+spec:
+  version: 10.0.8.0
+  profile: n1xc1.m8
+  imagePullSecrets:
+  - apic-registry-secret
+  imageRegistry: image-registry.cluster-poc-7be4149f30480846757a2468f333dd09-0000.eu-de.containers.appdomain.cloud
+  # imageRegistry: cp.icr.io/cp/apic
+  gatewayEndpoint:
+    #ingressClassName: $INGRESS_CLASS
+    annotations:
+      cert-manager.io/issuer: ingress-issuer
+    hosts:
+    - name: rgw.cluster-poc-7be4149f30480846757a2468f333dd09-0000.eu-de.containers.appdomain.cloud
+      secretName: gwv6-endpoint
+  gatewayManagerEndpoint:
+    #ingressClassName: $INGRESS_CLASS
+    annotations:
+      cert-manager.io/issuer: ingress-issuer
+    hosts:
+    - name: rgwd.cluster-poc-7be4149f30480846757a2468f333dd09-0000.eu-de.containers.appdomain.cloud
+      secretName: gwv6-manager-endpoint
+  mgmtPlatformEndpointCASecret:
+    secretName: ingress-ca # Usually ingress-ca
+  #mgmtPlatformEndpointSvcCASecret:
+  #  secretName:  # Usually management-ca
+  license:
+    accept: true
+    use: nonproduction
+    license: L-DZZQ-MGVN8V
+  tokenManagementService:
+    enabled: true
+    storage:
+      storageClassName: ibmc-vpc-block-10iops-tier
+      volumeSize: 30Gi
+  adminUser:
+    secretName: datapower-admin-credentials

@@ -1,0 +1,14 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ibm-apiconnect
+spec:
+  template:
+    spec:
+      containers:
+      - name: ibm-apiconnect
+        env:
+        - name: IMAGE_REGISTRY
+          value: image-registry.cluster-poc-7be4149f30480846757a2468f333dd09-0000.eu-de.containers.appdomain.cloud
+      imagePullSecrets:
+      - name: apic-registry-secret

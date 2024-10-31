@@ -1,0 +1,7 @@
+resources:
+  - analytics_cr.yaml
+
+patches:
+  - path: patch-analytics_cr.yaml
+
+namespace: apic

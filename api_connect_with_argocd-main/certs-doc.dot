@@ -1,0 +1,35 @@
+graph G {
+    "selfsigning-issuer" --
+    "ingress-ca" --
+    "management-ca";
+
+    "ingress-issuer" --
+    "gateway-peering" --
+    "analytics-ingestion-client" --
+    "gateway-service" --
+    "portal-admin" --
+    "analytics-ai-endpoint" --
+    "portal-admin-client" --
+    "gateway-client-client" --
+    "gwv6-manager-endpoint"
+
+#    "management-ca (issuer)" --
+#    "management-server" --
+#    "management-client" --
+#    "management-natcluster-mgmt" --
+#    "management-s3proxy-all" --
+#    "management-xxx-db-server" --
+#    "management-xxx-db-replication" --
+#    "management-db-client-postgres" --
+#    "management-db-client-apicuser"
+
+    "pkibw (custom issuer)" --
+    "custom-api-endpoint" --
+    "custom-apim-endpoint" --
+    "custom-cm-endpoint" --
+    "custom-consumer-endpoint" --
+    "custom-gwv6-endpoint" --
+    "custom-portal-web" --
+    "custom-consumer-catalog-endpoint"
+
+}
